@@ -1,0 +1,27 @@
+dist: xenial
+language: generic
+
+services:
+  - docker
+
+script:
+  - docker run
+    --cap-add=SYS_PTRACE
+    -e TRAVIS=true
+    -e PYTHON_VERSION=3.7.3
+    -e GPG_KEY=0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D
+    -e BUILD_DIR=/build
+    -v $TRAVIS_BUILD_DIR/build:/build
+    -v $TRAVIS_BUILD_DIR/build.sh:/build.sh
+    --entrypoint=./build.sh
+    centos:7.6.1810
+
+deploy:
+  provider: releases
+  api_key:
+    secure: M3e9S29WUWnII0PBYg4L/ZPq3TO7gHVISys+eDKGCJSu5t0pXhrk115GwuYRd0stIgwl+bh6rKoofhmeubpfEnmqNtaenEN1IpEYsYDcv77BrhFuDNmzzbbNZitrBL6ba1eMa/BKS7QwcMCwX1mGCcFltFcSgaM4ZaHsHHh3xom0pSzC3i/2Ecckx/sBeDVeg3n7lZNbMFT8fiwcv4nqxNLe7/CXlg90XbeLhJI4w7X/18QJp0big9W7hUWjWP4iHaBrOrYZRwi82/9Y6apcf/+/BuoclC8rUk/6WXl3aH98o939BlUiW9IxF1Htg1HQQnL6/vhfp+5GFcP0w/REU2fhzQQAtNHpMlyE3CpOCW0Pe2FJYKl2M340NyHWFzTd07Mn+ehvP5S1JZwaG3VkbbsqTZZvtxQAeFxhEUYCrC6GV7fSNf8PZUanGuar+hr27DPvAFjv7gKSsh5+4P/jB7KsagwzgPaCMlXdLaAvJvkXsb1x/giNSYs4APQ2Ed+4N7s9SsyoRiZ7KrHt07cUT626TLdQfFNB8SilfWlYWacMpeADaYprn8rBLVeIwEpaSIKMVDBI+sjAIabMQwnjsqQFIX4Pioye9G+9SXEWu+VHXEn30xcEmSDhxuPxJEUQKlLJ4ys9Qrypn3dJKV476O8ySXoyHB10pGqwFdeu69I=
+  file_glob: true
+  file: build/*.rpm
+  skip_cleanup: true
+  on:
+    tags: true
