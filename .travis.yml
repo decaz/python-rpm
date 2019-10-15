@@ -8,13 +8,13 @@ script:
   - docker run
     --cap-add=SYS_PTRACE
     -e TRAVIS=true
-    -e PYTHON_VERSION=3.7.5
-    -e GPG_KEY=0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D
+    -e PYTHON_VERSION=3.8.0
+    -e GPG_KEY=E3FF2839C048B25C084DEBE9B26995E310250568
     -e BUILD_DIR=/build
     -v $TRAVIS_BUILD_DIR/build:/build
     -v $TRAVIS_BUILD_DIR/build.sh:/build.sh
     --entrypoint=./build.sh
-    centos:7.6.1810
+    centos:7.7.1908
 
 deploy:
   provider: releases

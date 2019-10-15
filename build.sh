@@ -42,7 +42,6 @@ tar -xJC ${BUILD_DIR} --strip-components=1 -f python.tar.xz
 cd ${BUILD_DIR}
 ./configure \
 	--enable-shared \
-	--enable-optimizations \
 	--enable-loadable-sqlite-extensions \
 	--enable-ipv6 \
 	--with-system-expat \
@@ -82,6 +81,6 @@ fpm \
 	-d "xz" \
 	-d "bzip2" \
 	--directories /usr/local/lib/python${MAJOR}.${MINOR}/ \
-	--directories /usr/local/include/python${MAJOR}.${MINOR}m/ \
+	--directories /usr/local/include/python${MAJOR}.${MINOR}/ \
 	--after-install /tmp/installdir/run-ldconfig.sh \
 	usr/local
