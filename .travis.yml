@@ -8,7 +8,7 @@ script:
   - docker run
     --cap-add=SYS_PTRACE
     -e TRAVIS=true
-    -e PYTHON_VERSION=3.8.1
+    -e PYTHON_VERSION=3.8.2
     -e GPG_KEY=E3FF2839C048B25C084DEBE9B26995E310250568
     -e BUILD_DIR=/build
     -v $TRAVIS_BUILD_DIR/build:/build
